@@ -1,0 +1,6 @@
+{
+  "name": "Central Application Hub (CPH)",
+  "description": "Premium 3D-style company website for CPH, a digital solutions company that builds modern business systems, websites, apps, and SaaS logic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
