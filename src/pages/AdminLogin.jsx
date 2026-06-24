@@ -4,9 +4,11 @@ import { ArrowLeft, LockKeyhole, LogIn } from 'lucide-react';
 import Logo from '../components/Logo';
 import { clearAdminSession, getAdminRecord, getAdminSession, signInAdmin } from '../utils/leadService';
 
+const ADMIN_EMAIL = 'sahildwivedi59@gmail.com';
+
 const AdminLogin = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(ADMIN_EMAIL);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -33,14 +35,14 @@ const AdminLogin = () => {
 
       if (!admin || admin.role !== 'admin') {
         clearAdminSession();
-        setError('Access denied. This account is not registered as a CPH admin.');
+        setError('Access denied. This email is not registered as a CPH admin in Supabase.');
         return;
       }
 
       navigate('/admin-dashboard', { replace: true });
     } catch {
       clearAdminSession();
-      setError('Invalid email or password. Please try again.');
+      setError('Invalid admin email or password. Please check the Supabase Auth user credentials.');
     } finally {
       setIsLoading(false);
     }
@@ -56,12 +58,12 @@ const AdminLogin = () => {
             <span>Secure admin access</span>
           </div>
           <h1>Central Application Hub Admin Panel</h1>
-          <p>Login to view and manage website enquiries. Credentials are never shown on this page.</p>
+          <p>Login with the CPH admin Supabase Auth account to view and manage website enquiries.</p>
         </div>
 
         <form className="glass-card admin-login-card" onSubmit={handleSubmit}>
           <h2>Admin Login</h2>
-          <p>Use your CPH admin Supabase Auth account to continue.</p>
+          <p>Admin email is set to {ADMIN_EMAIL}. Use the password configured for this user in Supabase Auth.</p>
 
           <label>
             Email
@@ -80,7 +82,7 @@ const AdminLogin = () => {
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              placeholder="Enter password"
+              placeholder="Enter admin password"
               required
             />
           </label>
